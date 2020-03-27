@@ -1,0 +1,25 @@
+{
+  "name": "node-farm",
+  "version": "1.0.0",
+  "description": "Practicing Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iuliancarnaru/nodejs-bootcamp.git"
+  },
+  "author": "Iulian Carnaru",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iuliancarnaru/nodejs-bootcamp/issues"
+  },
+  "homepage": "https://github.com/iuliancarnaru/nodejs-bootcamp#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "slugify": "^1.4.0"
+  }
+}
