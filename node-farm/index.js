@@ -1,3 +1,10 @@
+// Better comment info
+// * Important message
+// ! Deprecated method
+// ? Should this mettod expose something
+// TODO: Refactor this line
+//-----------------------------------------
+
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
