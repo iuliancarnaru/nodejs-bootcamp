@@ -22,15 +22,15 @@ app.get('/api/v1/tours/:id', (req, res) => {
   // console.log(req.params);
 
   const id = req.params.id * 1;
+  const tour = tours.find(item => item.id === id);
 
-  if (id > tours.length) {
+  if (!tour) {
     return res.status(404).json({
       status: 'fail',
       message: 'Invalid id'
     });
   }
 
-  const tour = tours.find(item => item.id === id);
   res.status(200).json({
     status: 'success',
     data: {
@@ -57,6 +57,37 @@ app.post('/api/v1/tours', (req, res) => {
       });
     }
   );
+});
+
+// patch updates only fields provided not entire object
+app.patch('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id'
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      tour: '< Updated tour here... >'
+    }
+  });
+});
+
+app.delete('/api/v1/tours/:id', (req, res) => {
+  if (req.params.id * 1 > tours.length) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'Invalid id'
+    });
+  }
+
+  res.status(204).json({
+    status: 'success',
+    data: null
+  });
 });
 
 const PORT = 3000;
