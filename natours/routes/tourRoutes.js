@@ -7,14 +7,13 @@ const {
   getTour,
   updateTour,
   deleteTour,
-  checkId,
-  checkBody,
+  // checkId,
 } = require('../controllers/tourController');
 
 // MIDDLEWARE STACK
-router.param('id', checkId);
+// router.param('id', checkId);
 
-router.route('/').get(getAllTours).post(checkBody, createTour);
+router.route('/').get(getAllTours).post(createTour);
 
 router.route('/:id').get(getTour).patch(updateTour).delete(deleteTour);
 
