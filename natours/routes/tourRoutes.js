@@ -15,6 +15,7 @@ const {
 
 // MIDDLEWARE STACK
 // router.param('id', checkId);
+// ! Add some features
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 router.route('/tour-stats').get(getTourStats);
