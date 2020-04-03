@@ -4,14 +4,14 @@ const catchAsync = require('../utils/cachAsync');
 const AppError = require('../utils/appError');
 
 exports.aliasTopTours = (req, res, next) => {
-  // prefilling the query strings
+  // pre-filling the query strings
   req.query.limit = '5';
   req.query.sort = '-ratingsAverage,price';
   req.query.fields = 'name,price,ratingsAverage,summary,difficulty';
   next();
 };
 
-// ROUTE HANDELERS - CONTROLLERS
+// ROUTE HANDLERS - CONTROLLERS
 exports.getAllTours = catchAsync(async (req, res, next) => {
   // EXECUTE QUERY
   const features = new APIFeatures(Tour.find(), req.query)

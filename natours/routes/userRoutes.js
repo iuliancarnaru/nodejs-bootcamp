@@ -10,7 +10,7 @@ const {
 } = require('../controllers/userController');
 const { signup, login } = require('../controllers/authController');
 
-// signup is only as post (create new user)
+// sign up is only as post (create new user)
 router.post('/signup', signup);
 router.post('/login', login);
 

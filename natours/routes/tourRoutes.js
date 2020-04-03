@@ -14,7 +14,7 @@ const {
 } = require('../controllers/tourController');
 const { protect } = require('../controllers/authController');
 
-// MIDDLEWARE STACKs
+// MIDDLEWARE STACKS
 // router.param('id', checkId);
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);

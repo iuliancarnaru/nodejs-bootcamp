@@ -94,7 +94,7 @@ tourSchema.virtual('durationWeeks').get(function () {
   return this.duration / 7;
 });
 
-// MONGOOSE MIDDLEWARES
+// MONGOOSE MIDDLEWARE
 // 1. Document Middleware (runs only before .save() and .create())
 tourSchema.pre('save', function (next) {
   this.slug = slugify(this.name, { lower: true });
@@ -119,7 +119,7 @@ tourSchema.post(/^find/, function (docs, next) {
   next();
 });
 
-// 3. Aggregatiion middleware
+// 3. Aggregation middleware
 tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({
     $match: { secretTour: { $ne: true } },
