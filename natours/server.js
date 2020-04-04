@@ -24,17 +24,17 @@ mongoose
     useFindAndModify: false,
     useUnifiedTopology: true,
   })
-  .then(() => console.log(`DB connection succesful`));
+  .then(() => console.log(`DB connection successfully`));
 // .catch((err) => console.log(err));
 
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, '127.0.0.1', () =>
-  console.log(`App runnind and listening on port ${PORT}`)
+  console.log(`App running and listening on port ${PORT}`)
 );
 
 process.on('unhandledRejection', (err) => {
   console.log(err.name, err.message);
-  console.log(`Unhandeled rejection! Shutting down...`);
+  console.log(`Unhandled rejection! Shutting down...`);
   // use third party app to restart the service
   server.close(() => {
     process.exit(1);
