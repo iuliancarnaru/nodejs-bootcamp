@@ -15,7 +15,6 @@ const {
 const { protect, restrictTo } = require('../controllers/authController');
 
 // MIDDLEWARE STACKS
-// router.param('id', checkId);
 
 router.route('/top-5-cheap').get(aliasTopTours, getAllTours);
 router.route('/tour-stats').get(getTourStats);
