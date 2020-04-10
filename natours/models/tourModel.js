@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
-// const validator = require('validator');
+// EMBEDDING
+// const User = require('./userModel');
 
 const tourSchema = new mongoose.Schema(
   {
@@ -102,6 +103,16 @@ const tourSchema = new mongoose.Schema(
         day: Number,
       },
     ],
+    // EMBEDDING
+    // guides: Array,
+
+    // REFERENCING
+    guides: [
+      {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+      },
+    ],
   },
   {
     toJSON: {
@@ -125,10 +136,12 @@ tourSchema.pre('save', function (next) {
   next();
 });
 
-tourSchema.post('save', function (doc, next) {
-  console.log(doc);
-  next();
-});
+// EMBEDDING
+// tourSchema.pre('save', async function (next) {
+//   const guidesPromises = this.guides.map(async (id) => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
 
 // 2. Query Middleware
 tourSchema.pre(/^find/, function (next) {
@@ -137,8 +150,17 @@ tourSchema.pre(/^find/, function (next) {
   next();
 });
 
+tourSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'guides',
+    select: '-__v -passwordChangedAt',
+  });
+  next();
+});
+
 tourSchema.post(/^find/, function (docs, next) {
-  console.log(`Querry took: ${Date.now() - this.start} milliseconds.`);
+  // eslint-disable-next-line no-console
+  console.log(`Query took: ${Date.now() - this.start} milliseconds.`);
   // console.log(docs);
   next();
 });
@@ -148,6 +170,7 @@ tourSchema.pre('aggregate', function (next) {
   this.pipeline().unshift({
     $match: { secretTour: { $ne: true } },
   });
+  // eslint-disable-next-line no-console
   console.log(this.pipeline());
   next();
 });
