@@ -18,6 +18,7 @@ const {
   forgotPassword,
   resetPassword,
   updatePassword,
+  restrictTo,
 } = require('../controllers/authController');
 
 // sign up is only as post (create new user)
@@ -33,6 +34,8 @@ router.patch('/updateMyPassword', updatePassword);
 router.get('/me', getMe, getUser);
 router.patch('/updateMe', updateMe);
 router.delete('/deleteMe', deleteMe);
+
+router.use(restrictTo('admin'));
 
 // managing users (admin)
 router.route('/').get(getAllUsers).post(createUser);
