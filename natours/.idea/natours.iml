@@ -21,5 +21,10 @@
     <orderEntry type="library" name="@types/morgan" level="application" />
     <orderEntry type="library" name="@types/hpp" level="application" />
     <orderEntry type="library" name="@types/express-mongo-sanitize" level="application" />
+    <orderEntry type="library" name="@types/express" level="application" />
+    <orderEntry type="library" name="@types/mongoose" level="application" />
+    <orderEntry type="library" name="@types/validator" level="application" />
+    <orderEntry type="library" name="@types/bcryptjs" level="application" />
+    <orderEntry type="library" name="@types/nodemailer" level="application" />
   </component>
 </module>

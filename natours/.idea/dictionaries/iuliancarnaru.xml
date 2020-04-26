@@ -3,6 +3,8 @@
     <words>
       <w>bcrypt</w>
       <w>gmail</w>
+      <w>natours</w>
+      <w>nodemailer</w>
       <w>signup</w>
       <w>slugify</w>
       <w>virtuals</w>
