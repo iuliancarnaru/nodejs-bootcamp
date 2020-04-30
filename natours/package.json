@@ -6,11 +6,15 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js"
+    "debug": "ndb server.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bunde.js"
   },
   "author": "Iulian Carnaru",
   "license": "ISC",
   "dependencies": {
+    "@babel/polyfill": "^7.8.7",
+    "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -25,6 +29,7 @@
     "morgan": "^1.10.0",
     "node-core-lib": "^0.11.11",
     "nodemailer": "^6.4.6",
+    "parcel-bundler": "^1.12.4",
     "pug": "^2.0.4",
     "slugify": "^1.4.0",
     "validator": "^13.0.0",

@@ -70,6 +70,31 @@ exports.login = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    const decoded = await promisify(jwt.verify)(
+      req.cookies.jwt,
+      process.env.JWT_SECRET
+    );
+
+    // check if user still exists
+    const currentUser = await User.findById(decoded.id);
+    if (!currentUser) {
+      return next();
+    }
+
+    // check if user changed password after token was issued
+    if (currentUser.changedPasswordAfter(decoded.iat)) {
+      return next();
+    }
+
+    // grant access to protected route
+    res.locals.user = currentUser;
+    return next();
+  }
+  next();
+});
+
 exports.protect = catchAsync(async (req, res, next) => {
   // get token and check if it's there
   let token;
@@ -115,7 +140,7 @@ exports.protect = catchAsync(async (req, res, next) => {
 exports.restrictTo = (...roles) => {
   return (req, res, next) => {
     // roles is an array ['admin','lead-guide'] (default role is 'user')
-    console.log(req.user.role);
+    // console.log(req.user.role);
     if (!roles.includes(req.user.role)) {
       return next(
         new AppError(`You don't have permission to perform this action`, 403)
