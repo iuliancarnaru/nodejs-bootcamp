@@ -1,11 +1,14 @@
 const path = require('path');
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const cookieParser = require('cookie-parser');
+
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -38,11 +41,15 @@ const limiter = rateLimit({
 // if server reset limit is reset as well
 app.use('/api', limiter);
 
+// CORS-enabled for all origins
+app.use(cors());
+
 // security for http headers
 app.use(helmet());
 
 // body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
+app.use(cookieParser());
 
 // data sanitization against noSQL query injections
 app.use(mongoSanitize());
@@ -65,7 +72,7 @@ app.use(
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
-  // console.log(req.headers);
+  console.log(req.cookies);
   next();
 });
 
