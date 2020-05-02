@@ -79,30 +79,29 @@ exports.logout = (req, res) => {
 };
 
 exports.isLoggedIn = async (req, res, next) => {
-  try {
-    if (req.cookies.jwt) {
+  if (req.cookies.jwt) {
+    try {
       const decoded = await promisify(jwt.verify)(
         req.cookies.jwt,
         process.env.JWT_SECRET
       );
 
-      // check if user still exists
       const currentUser = await User.findById(decoded.id);
+
       if (!currentUser) {
         return next();
       }
 
-      // check if user changed password after token was issued
       if (currentUser.changedPasswordAfter(decoded.iat)) {
         return next();
       }
 
-      // grant access to protected route
       res.locals.user = currentUser;
+
+      return next();
+    } catch (error) {
       return next();
     }
-  } catch (error) {
-    return next();
   }
   next();
 };
@@ -146,6 +145,8 @@ exports.protect = catchAsync(async (req, res, next) => {
 
   // grant access to protected route
   req.user = currentUser;
+  res.locals.user = currentUser;
+
   next();
 });
 
