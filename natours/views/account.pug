@@ -31,7 +31,7 @@ block content
             h2.heading-secondary.ma-bt-md Your account settings
 
             //- without API
-            //- form.form.form-user-data(action="/submit-user-data" method="POST")
+            //- form.form.form-user-data(action="/submit-user-data" method="POST", enctype='multipart/form-data')
 
             form.form.form-user-data
             .form__group
@@ -42,7 +42,8 @@ block content
                 input#email.form__input(type='email', name="email", value=`${user.email}`, required)
             .form__group.form__photo-upload
                 img.form__user-photo(src=`img/users/${user.photo}`, alt='User photo')
-                a.btn-text(href='') Choose new photo
+                label(for='photo') Choose new photo
+                input.form__upload(type='file', accept='image/*', id='photo', name='photo')
             .form__group.right
                 button.btn.btn--small.btn--green Save settings
 
