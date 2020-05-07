@@ -49,6 +49,15 @@ app.use('/api', limiter);
 // CORS-enabled for all origins
 app.use(cors());
 
+// Access-Control-Allow-Origin
+// app.use(
+//   cors({
+//     origin: 'https://wwww.natours.com',
+//   })
+// );
+
+app.options('*', cors());
+
 // security for http headers
 app.use(helmet());
 
