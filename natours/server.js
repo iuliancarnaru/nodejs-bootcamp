@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
@@ -28,7 +30,7 @@ mongoose
 // .catch((err) => console.log(err));
 
 const PORT = process.env.PORT || 8000;
-const server = app.listen(PORT, '127.0.0.1', () =>
+const server = app.listen(PORT, () =>
   console.log(`App running and listening on port ${PORT}`)
 );
 
