@@ -1,5 +1,6 @@
 const path = require('path');
 const express = require('express');
+const compression = require('compression');
 const cors = require('cors');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
@@ -71,6 +72,8 @@ app.use(
     ],
   })
 );
+
+app.use(compression());
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
