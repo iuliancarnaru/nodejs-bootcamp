@@ -12,6 +12,7 @@ const cookieParser = require('cookie-parser');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const { webhookCheckout } = require('./controllers/bookingController');
 
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -45,6 +46,12 @@ const limiter = rateLimit({
 });
 // if server reset limit is reset as well
 app.use('/api', limiter);
+
+app.post(
+  '/webhook-checkout',
+  express.raw({ type: 'application/json' }),
+  webhookCheckout
+);
 
 // CORS-enabled for all origins
 app.use(cors());
