@@ -21,6 +21,9 @@ const bookingRouter = require('./routes/bookingRoutes');
 
 const app = express();
 
+// to work with heroku proxy
+app.enable('trust proxy');
+
 // define view engine
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
